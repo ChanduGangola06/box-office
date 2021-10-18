@@ -5,6 +5,7 @@ function showsReducer(prevState, action) {
     case 'ADD': {
       return [...prevState, action.showId];
     }
+
     case 'REMOVE': {
       return prevState.filter(showId => showId !== action.showId);
     }
@@ -24,9 +25,10 @@ function usePersistedReducer(reducer, initialState, key) {
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(state));
   }, [state, key]);
+
   return [state, dispatch];
 }
 
-export function useShow(key = 'shows') {
+export function useShows(key = 'shows') {
   return usePersistedReducer(showsReducer, [], key);
 }
